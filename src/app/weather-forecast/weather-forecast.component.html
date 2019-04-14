@@ -1,24 +1,58 @@
-<mat-card *ngIf="(weatherForecast$ | async) as weatherForecast; else loading">
-  <mat-card-content>
-    <h2>Weather in London</h2>
-    <ng-container *ngFor="let weather of weatherForecast.weather">
-      <img [src]="weather.icon | weatherIcon"/>
-      <p>{{ weather.description }}</p>
-    </ng-container>
-    <p> Temperature:
-      <label>Current: {{ weatherForecast.main.temp | temperature }}</label>
-      <label>Min: {{ weatherForecast.main.temp_min | temperature }}</label>
-      <label>Max: {{ weatherForecast.main.temp_max | temperature }}</label>
-    </p>
+<h2 class="title">Weather in {{ currentCity }}</h2>
+<div class="weather-cards" *ngIf="(weatherForecast$ | async) as weatherForecast; else loading">
+  <mat-card class="mat-elevation-z4">
+    <mat-card-content>
+      <ng-container *ngFor="let weather of weatherForecast.weather">
+        <section class="weather">
+          <div class="current-weather">
+            <img [alt]="weather.main" [src]="weather.icon | weatherIcon"/>
+            <label>{{ weatherForecast.main.temp | temperature }}</label>
+          </div>
+          <label class="description">{{ weather.description }}</label>
+        </section>
+      </ng-container>
+      <p>
+        <strong>Min:</strong>
+        {{ weatherForecast.main.temp_min | temperature }}
+      </p>
+      <p>
+        <strong>Max:</strong>
+        {{ weatherForecast.main.temp_max | temperature }}
+      </p>
 
-    <p>Cloudiness: {{ weatherForecast.clouds.all }}</p>
-    <p>Pressure: {{ weatherForecast.main.pressure }} hpa</p>
-    <p>Humidity	: {{ weatherForecast.main.humidity }}%</p>
-    <p>Sunrise: {{ weatherForecast.sys.sunrise | date: 'HH:mm' }}</p>
-    <p>Sunset: {{ weatherForecast.sys.sunset | date: 'HH:mm' }}</p>
-    <p>Geo coords: [ {{ weatherForecast.coord.lat }}, {{ weatherForecast.coord.lon }} ]</p>
-  </mat-card-content>
-</mat-card>
+      <p class="wind">
+        <strong>Wind:</strong>
+        {{ weatherForecast.wind.speed }} m/s
+        <mat-icon [style.transform]="'rotate(' + weatherForecast.wind.deg + 'deg)'">
+          arrow_upward
+        </mat-icon>
+      </p>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="mat-elevation-z4">
+    <mat-card-content>
+      <p>
+        <strong>Cloudiness:</strong> {{ weatherForecast.clouds.all }}%
+      </p>
+      <p>
+        <strong>Pressure:</strong> {{ weatherForecast.main.pressure }} hpa
+      </p>
+      <p>
+        <strong>Humidity:</strong> {{ weatherForecast.main.humidity }}%
+      </p>
+      <p>
+        <strong>Sunrise:</strong> {{ weatherForecast.sys.sunrise * 1000 | date: 'HH:mm' }}
+      </p>
+      <p>
+        <strong>Sunset:</strong> {{ weatherForecast.sys.sunset * 1000 | date: 'HH:mm' }}
+      </p>
+      <p>
+        <strong>Geo coords:</strong> [ {{ weatherForecast.coord.lat }}, {{ weatherForecast.coord.lon }} ]
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
 
 <ng-template #loading>
   <mat-spinner></mat-spinner>

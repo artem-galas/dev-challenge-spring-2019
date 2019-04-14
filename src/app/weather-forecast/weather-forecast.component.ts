@@ -14,15 +14,18 @@ import { OpenWeatherResponseModel } from '~/shared/models';
   styleUrls: ['./weather-forecast.component.scss']
 })
 export class WeatherForecastComponent extends BaseComponent implements OnInit {
-
   weatherForecast$!: Observable<OpenWeatherResponseModel>;
+  currentCity: string;
+
   constructor(private readonly weatherForecastService: WeatherForecastService) {
     super();
+
+    this.currentCity = 'London';
   }
 
   ngOnInit() {
     this.weatherForecast$ = this.weatherForecastService
-      .getCurrentWeather('London');
+      .getCurrentWeather(this.currentCity);
   }
 
 }

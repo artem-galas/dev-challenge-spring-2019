@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 
 import { MaterialModule, SharedModule } from '~/framework';
+
+import { TemperaturePipe, WeatherIconPipe } from '~/shared/pipes';
+
 import { WeatherForecastComponent } from './weather-forecast.component';
-import { WeatherIconPipe } from '~/shared/pipes/weather-icon.pipe';
-import { TemperaturePipe } from '~/shared/pipes/temperature.pipe';
 
 @NgModule({
   imports: [
