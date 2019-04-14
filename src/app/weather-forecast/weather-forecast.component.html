@@ -1,0 +1,25 @@
+<mat-card *ngIf="(weatherForecast$ | async) as weatherForecast; else loading">
+  <mat-card-content>
+    <h2>Weather in London</h2>
+    <ng-container *ngFor="let weather of weatherForecast.weather">
+      <img [src]="weather.icon | weatherIcon"/>
+      <p>{{ weather.description }}</p>
+    </ng-container>
+    <p> Temperature:
+      <label>Current: {{ weatherForecast.main.temp | temperature }}</label>
+      <label>Min: {{ weatherForecast.main.temp_min | temperature }}</label>
+      <label>Max: {{ weatherForecast.main.temp_max | temperature }}</label>
+    </p>
+
+    <p>Cloudiness: {{ weatherForecast.clouds.all }}</p>
+    <p>Pressure: {{ weatherForecast.main.pressure }} hpa</p>
+    <p>Humidity	: {{ weatherForecast.main.humidity }}%</p>
+    <p>Sunrise: {{ weatherForecast.sys.sunrise | date: 'HH:mm' }}</p>
+    <p>Sunset: {{ weatherForecast.sys.sunset | date: 'HH:mm' }}</p>
+    <p>Geo coords: [ {{ weatherForecast.coord.lat }}, {{ weatherForecast.coord.lon }} ]</p>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>

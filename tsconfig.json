@@ -11,6 +11,12 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es5",
+    "strict": true,
+    "paths": {
+      "~/*": [
+        "./src/app/*"
+      ]
+    },
     "typeRoots": [
       "node_modules/@types"
     ],
