@@ -1,39 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
 import { BaseComponent } from '~/framework';
 
-import { WeatherForecastService } from '~/shared/services';
-import { OpenWeatherResponseModel } from '~/shared/models';
-import { CityListService } from '~/shared/services/city-list.service';
-
+import { CityResponseModel, OpenWeatherResponseModel } from '~/shared/models';
+import { CityListService, WeatherForecastService } from '~/shared/services';
 
 @Component({
   selector: 'dev-challenge-weather-forecast',
   templateUrl: './weather-forecast.component.html',
-  styleUrls: ['./weather-forecast.component.scss']
+  styleUrls: ['./weather-forecast.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WeatherForecastComponent extends BaseComponent implements OnInit {
   weatherForecast$!: Observable<OpenWeatherResponseModel>;
-  currentCity: string;
+  cities$!: Observable<Array<CityResponseModel>>;
+  selectedCity!: CityResponseModel;
+  initialCityName = 'London';
 
   constructor(private readonly weatherForecastService: WeatherForecastService,
-              private readonly cityListService: CityListService) {
+              private readonly cityListService: CityListService,
+              private readonly cdr: ChangeDetectorRef) {
     super();
-
-    this.currentCity = 'London';
   }
 
   ngOnInit() {
-    // this.weatherForecast$ = this.weatherForecastService
-    //   .getCurrentWeather(this.currentCity);
+    this.cities$ = this.cityListService.getCities();
+  }
 
-    this.cityListService
-      .searchCity('londo')
-      .subscribe(cur => {
-        console.log(cur);
-      });
+  citySelected(city: CityResponseModel) {
+    this.selectedCity = city;
+    this.cdr.markForCheck();
+    this.weatherForecast$ = this.weatherForecastService
+      .getCurrentWeather(city.id);
   }
 
 }
