@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MaterialModule, SharedModule } from '~/framework';
-
+import { MaterialModule } from '~/material/material.module';
 import { TemperaturePipe, WeatherIconPipe } from '~/shared/pipes';
 
 import { WeatherForecastComponent } from './weather-forecast.component';
@@ -10,7 +10,8 @@ import { CityAutocompleteComponent } from './city-autocomplete/city-autocomplete
 
 @NgModule({
   imports: [
-    SharedModule,
+    CommonModule,
+    FormsModule,
     ReactiveFormsModule,
     MaterialModule,
   ],

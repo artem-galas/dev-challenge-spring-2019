@@ -1,11 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { OpenWeatherResponseModel } from '~/shared/models';
 
 import { WeatherForecastConfig, WeatherForecastConfigService } from './weather-forecast.config.service';
+import { catchError } from 'rxjs/operators';
 
 type ID = number;
 type cityName = string;
@@ -32,7 +33,10 @@ export class WeatherForecastService {
       throw TypeError('Invalid arguments types. It can be string or number');
     }
 
-    return this.http.get<OpenWeatherResponseModel>(`${this.apiUrl}`, {params});
+    return this.http.get<OpenWeatherResponseModel>(`${this.apiUrl}`, {params})
+      .pipe(
+        catchError((httpErrorResponse: HttpErrorResponse) => throwError(httpErrorResponse.error))
+      );
   }
 
 }

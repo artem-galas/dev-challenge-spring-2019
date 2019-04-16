@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from '~/framework';
+import { MaterialModule } from '~/material/material.module';
+
 import { WeatherForecastConfigService, WeatherForecastService } from '~/shared/services';
 
 import { WeatherForecastModule } from './weather-forecast/weather-forecast.module';
@@ -17,6 +19,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     MaterialModule,
     WeatherForecastModule

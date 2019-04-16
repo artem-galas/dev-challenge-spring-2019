@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 
 import { Observable } from 'rxjs';
 
-import { BaseComponent } from '~/framework';
-
 import { CityResponseModel, OpenWeatherResponseModel } from '~/shared/models';
 import { CityListService, WeatherForecastService } from '~/shared/services';
 
@@ -13,7 +11,7 @@ import { CityListService, WeatherForecastService } from '~/shared/services';
   styleUrls: ['./weather-forecast.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class WeatherForecastComponent extends BaseComponent implements OnInit {
+export class WeatherForecastComponent implements OnInit {
   weatherForecast$!: Observable<OpenWeatherResponseModel>;
   cities$!: Observable<Array<CityResponseModel>>;
   selectedCity!: CityResponseModel;
@@ -22,7 +20,6 @@ export class WeatherForecastComponent extends BaseComponent implements OnInit {
   constructor(private readonly weatherForecastService: WeatherForecastService,
               private readonly cityListService: CityListService,
               private readonly cdr: ChangeDetectorRef) {
-    super();
   }
 
   ngOnInit() {
