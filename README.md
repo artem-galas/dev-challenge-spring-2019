@@ -1,27 +1,36 @@
-# OpenWeather
+# Open Weather
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+This project can display current weather in your town.
 
-## Development server
+![Startup Application](doc/01.jpg)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Pre Requirements
+- Be sure you have installed `node v10.15` or more.
+- run `npm install` for install all dependency
 
-## Code scaffolding
+## Run Project
+- `npm start` - build the project for development. Navigate to `http://localhost:4200/`
+- `npm run build` - build project for production into `./dist` folder.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Run Tests
+- `npm test` -  to execute the unit tests via [Karma](https://karma-runner.github.io).
+- `npm run e2e` - to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Build
+## Project Architecture
+- **e2e** - contain ent-to-end tests
+- **src** - source files folder
+  - **app** - main working folder with necessary components/modules
+    - **material** - contain `material.module.ts` where all necessary material modules are included
+    - **shared** - contain shared elements (which might be used in any component)
+      - **models** - contain all necessary Interfaces for server response (city, open-weather)
+      - **pipes** - pipes they are help display information in correct format
+      - **services** - contain services which are send request to the API and service which are necessary for configure API key (`weather-forecast.config`)
+    - **testing** - contain city and open-weather response mock.
+    - **weather-forecast** - module contain all component which are responsible for display current weather
+      - **city-autocomplete** - component which responsible for search city
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Project specification
 
-## Running unit tests
+Project build thought [ng cli](https://cli.angular.io/) and use [Angular Material](https://material.angular.io) for styling.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Search by city use `city.list.json.gz` and ungzip on the client side thought [pako](https://www.npmjs.com/package/pako) package.
