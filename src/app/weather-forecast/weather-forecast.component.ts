@@ -44,7 +44,6 @@ export class WeatherForecastComponent implements OnInit {
    * Event was called after city selection on {@link CityAutocompleteComponent}
    * Then get information about weather in the city.
    *
-   * @param city
    */
   citySelected(city: CityResponseModel) {
     this.selectedCity = city;

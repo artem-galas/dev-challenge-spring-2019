@@ -1,0 +1,17 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "rule-empty-line-before": [
+      "always-multi-line",
+      {
+        "except": ["first-nested", "inside-block", "inside-block-and-after-rule"]
+      }
+    ],
+    "selector-type-no-unknown": [
+      true,
+      {
+        "ignore": ["custom-elements"]
+      }
+    ]
+  }
+}

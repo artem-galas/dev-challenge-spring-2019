@@ -26,7 +26,6 @@ import { CityResponseModel } from '~/shared/models';
 @Component({
   selector: 'dev-challenge-city-autocomplete',
   templateUrl: './city-autocomplete.component.html',
-  styleUrls: ['./city-autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CityAutocompleteComponent implements OnInit {
@@ -52,8 +51,6 @@ export class CityAutocompleteComponent implements OnInit {
    * @description
    * How selected city should be displayed in autocomplete
    *
-   * @param {CityResponseModel} city
-   * @return {string | undefined}
    */
   displayFn(city: CityResponseModel): string | undefined {
     return city ? `${city.name}, ${city.country}` : undefined;
@@ -80,9 +77,7 @@ export class CityAutocompleteComponent implements OnInit {
    * searchCity
    * @description
    * Search city by name.
-   *
-   * @param {string} name
-   * @return {Array<CityResponseModel>} - list of cities which are correct for searching params
+   * Return list of cities which are correct for searching params
    */
   private searchCity(name: string): Array<CityResponseModel> {
     const filterValue = name.toLocaleLowerCase();

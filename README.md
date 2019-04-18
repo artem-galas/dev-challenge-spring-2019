@@ -16,6 +16,11 @@ This project can display current weather in your town.
 - `npm test` -  to execute the unit tests via [Karma](https://karma-runner.github.io).
 - `npm run e2e` - to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
+## Run linting project
+For lint project using [tslint](https://palantir.github.io/tslint/) and [stylelint](https://stylelint.io/)
+
+- `npm run lint` - execute linting for `.ts` files as well as `.scss` files
+
 ## Project Architecture
 - **e2e** - contain ent-to-end tests
 - **src** - source files folder

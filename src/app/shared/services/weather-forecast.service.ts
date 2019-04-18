@@ -54,8 +54,6 @@ export class WeatherForecastService {
    * If params is not correct throw TypeError;
    * If response is error return {@link throwError} with error body;
    *
-   * @param {number | string} value {@link getCurrentWeatherParams}
-   * @return {Observable<OpenWeatherResponseModel>} {@link OpenWeatherResponseModel}
    */
   getCurrentWeather(value: getCurrentWeatherParams): Observable<OpenWeatherResponseModel> {
     let params = new HttpParams();
